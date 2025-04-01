@@ -140,6 +140,8 @@ init[paste0("Dv", 1:np)]   <- 0
 all_runs <- list()
 time_horizons <- list("1yr" = 365, "5yr" = 1825, "10yr" = 3650)
 
+
+#This is mislabelled- it's death not infection
 for (label in names(time_horizons)) {
   maxtime <- time_horizons[[label]]
   times <- seq(0, maxtime, 1)
@@ -147,7 +149,7 @@ for (label in names(time_horizons)) {
   para$t_intv <- Inf
   baseline <- ode(y = init, times = times, func = metapop_model, parms = para, method = "ode45")
   baseline_df <- as.data.frame(baseline)
-  first_infection_day <- which(baseline_df$Ih1 >= 1)[1] - 1
+  first_infection_day <- which(baseline_df$Ddh1 >= 1)[1] - 1
   if (is.na(first_infection_day)) next
   
   timings <- list(
