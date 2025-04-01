@@ -99,11 +99,11 @@ for (label in names(time_horizons)) {
   times <- seq(0, maxtime, 1)
   para <- base_parameters
   
-  # First infection timing
+  # First death timing
   para$t_intv <- Inf
   baseline <- ode(y = init, times = times, func = metapop_model, parms = para, method = "ode45")
   baseline_df <- as.data.frame(baseline)
-  first_day <- which(baseline_df$Ih1 >= 1)[1] - 1
+  first_day <- which(baseline_df$Dh1 >= 1)[1] - 1
   if (is.na(first_day)) next
   
   timings <- list(
